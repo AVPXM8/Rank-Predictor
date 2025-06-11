@@ -43,12 +43,48 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/nimcet-pr
 });
 
 // Twilio Configuration
-const twilioClient = process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN 
-    ? twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN)
-    : null;
+// const twilioClient = process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN 
+//     ? twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN)
+//     : null;
+
+// const TWILIO_PHONE_NUMBER = process.env.TWILIO_PHONE_NUMBER;
+// const SMS_ENABLED = ()=>{
+//     if (process.env.SMS_ENABLED === 'true') {
+//   // Send SMS via Twilio
+// } else {
+//   console.log(`📱 SMS DISABLED - Would send to ${phoneNumber}: ${otp}`);
+// }
+// }
+// const SMS_ENABLED = process.env.SMS_ENABLED === 'true' && twilioClient;
+
+// 1. Import and configure Twilio if credentials are available
+
+const twilioClient = process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN
+  ? twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN)
+  : null;
 
 const TWILIO_PHONE_NUMBER = process.env.TWILIO_PHONE_NUMBER;
-const SMS_ENABLED = process.env.SMS_ENABLED === 'true' && twilioClient;
+const SMS_ENABLED = process.env.SMS_ENABLED === 'true' && twilioClient !== null;
+
+// 2. Define function to send SMS
+async function sendOTP(phoneNumber, otp) {
+  if (!SMS_ENABLED) {
+    console.log(`📱 SMS DISABLED - Would send to ${phoneNumber}: Your OTP is ${otp}`);
+    return;
+  }
+
+  try {
+    await twilioClient.messages.create({
+      body: `Your Maarula Classes Rank Predictor OTP is: ${otp}. Valid for 10 minutes. Do not share with anyone.`,
+      from: TWILIO_PHONE_NUMBER,
+      to: phoneNumber,
+    });
+    console.log(`✅ OTP sent to ${phoneNumber}`);
+  } catch (err) {
+    console.error(`❌ Failed to send OTP to ${phoneNumber}:`, err);
+  }
+}
+
 
 console.log('🔧 Configuration Status:');
 console.log('- MongoDB:', mongoose.connection.readyState === 1 ? '✅ Connected' : '⏳ Connecting...');
