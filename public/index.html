@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIMCET 2025 Rank Predictor - Maarula Classes</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="icon" href="favicon.png" type="image/png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .step {
+            display: none; /* Hide all steps by default */
+        }
+        .step.active {
+            display: block; /* Show only the active step */
+        }
+        .results-container {
+            display: none; /* Hide the results container by default */
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-content">
+            <a href="https://maarula.in" target="_blank" title="Visit Maarula Classes">
+                <img src="maarulalogo.png" alt="Maarula Classes Logo" class="header-logo">
+            </a>
+            <div class="header-title">
+                <h1>NIMCET 2025 Rank Predictor</h1>
+                <p>By Maarula Classes</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="phoneStep" class="step active">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h2>Begin Your Prediction</h2>
+                    <p>First, please verify your 10-digit mobile number to proceed.</p>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="phoneNumber" placeholder="Enter mobile number" maxlength="10" autocomplete="off">
+                    </div>
+                    <button id="sendOtpBtn" class="btn btn-primary" disabled>Send OTP</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="otpStep" class="step">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-key"></i>
+                    <h2>Enter OTP</h2>
+                    <p>An OTP has been sent to <strong id="displayPhone"></strong></p>
+                </div>
+                <div class="card-body">
+                    <div class="otp-debug" id="otpDebug"></div>
+                    <div id="nameInputContainer" class="input-group" style="display: none;">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="fullName" placeholder="Enter your full name">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="text" id="otpInput" placeholder="Enter 6-digit OTP" maxlength="6" autocomplete="off">
+                    </div>
+                    <button id="verifyOtpBtn" class="btn btn-primary" disabled>Verify & Proceed</button>
+                    <button id="resendOtpBtn" class="btn btn-secondary">Resend OTP</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="predictionStep" class="step">
+            <div class="card">
+                <div class="card-header user-info-header" id="userInfo">
+                    <div class="avatar" id="avatar">U</div>
+                    <div class="user-details">
+                        <strong id="userFullName">User Name</strong>
+                        <small id="verifiedPhone">Phone Number</small>
+                    </div>
+                    <button id="logoutBtn" class="logout-button" title="Logout & Start Over"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <div class="card-body">
+                    <div id="predictionLimitDisplay"></div>
+                    <div class="input-group">
+                        <i class="fas fa-marker"></i>
+                        <input type="number" id="marksInput" placeholder="Enter your NIMCET marks (0-1000)" min="0" max="1000">
+                         <div class="marks-info"><span id="percentageDisplay"></span></div>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-users"></i>
+                        <select id="categorySelect">
+                             <option value="General">General</option>
+                             <option value="EWS">EWS</option>
+                             <option value="OBC">OBC</option>
+                             <option value="SC">SC</option>
+                             <option value="ST">ST</option>
+                             <option value="PWD">PWD</option>
+                        </select>
+                    </div>
+                    <button id="predictBtn" class="btn btn-primary" disabled>Predict My Rank & Colleges</button>
+                </div>
+            </div>
+        </div>
+        <div id="resultsContainer" class="results-container">
+    <div class="result-card">
+        <div class="result-header">
+            <i class="fas fa-trophy"></i>
+            <h3>Your Predicted Rank</h3>
+        </div>
+        <div class="result-body">
+            <div class="rank-display">
+                <span class="rank-range" id="rankRange"></span>
+                <p class="rank-message" id="rankMessage"></p>
+            </div>
+            <div class="result-details">
+                <div class="detail-row">
+                    <span class="label">Your Marks:</span>
+                    <span class="value" id="resultMarks"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Percentage:</span>
+                    <span class="value" id="resultPercentage"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="label">Category:</span>
+                    <span class="value" id="resultCategory"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="colleges-section">
+        <div class="colleges-header">
+            <i class="fas fa-university"></i>
+            <h3>Recommended Colleges</h3>
+            <span class="colleges-count" id="collegesCount"></span>
+        </div>
+        <div class="college-filters">
+            <select id="tierFilter">
+                <option value="all">All Tiers</option>
+                <option value="1">Tier 1</option>
+                <option value="2">Tier 2</option>
+                <option value="3">Tier 3</option>
+            </select>
+            <select id="chanceFilter">
+                <option value="all">All Chances</option>
+                <option value="high">High Chance</option>
+                <option value="moderate">Moderate Chance</option>
+                <option value="low">Low Chance</option>
+            </select>
+        </div>
+        <div id="collegesList" class="colleges-list">
+            </div>
+    </div>
+</div>
+        
+        <!-- <div id="resultsContainer" class="results-container">
+            <div class="result-card" style="display:none;"> 
+                <div class="result-header"><h3></h3></div>
+                <div class="result-body">
+                    <div class="rank-display">
+                        <span id="rankRange"></span>
+                        <p id="rankMessage"></p>
+                    </div>
+                    <div class="result-details">
+                        <div class="detail-row">
+                            <span class="label"></span><span class="value" id="resultMarks"></span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label"></span><span class="value" id="resultPercentage"></span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label"></span><span class="value" id="resultCategory"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="colleges-section" style="display:none;">
+                <div class="colleges-header">
+                    <h3></h3>
+                    <span id="collegesCount"></span>
+                </div>
+                <div class="college-filters">
+                    <select id="tierFilter"></select>
+                    <select id="chanceFilter"></select>
+                </div>
+                <div id="collegesList"></div>
+            </div>
+        </div> -->
+    </main>
+    
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+    </div>
+    <div id="toast" class="toast"></div>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 Maarula Classes. All Rights Reserved.</p>
+        <div class="footer-links">
+            <a href="tel:+919935985550"><i class="fas fa-phone"></i> +91 99359 85550</a>
+            <a href="https://maarula.in" target="_blank"><i class="fas fa-globe"></i> maarula.in</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIMCET 2025 Rank Predictor - Maarula Classes</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="icon" href="https://maarula.in/wp-content/uploads/2024/02/cropped-32x32-1-32x32.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-content">
+            <a href="https://maarula.in" target="_blank" title="Visit Maarula Classes">
+                <img src="https://maarula.in/wp-content/uploads/2024/02/cropped-favicon-192x192.png" alt="Maarula Classes Logo" class="header-logo">
+            </a>
+            <div class="header-title">
+                <h1>NIMCET 2025 Rank Predictor</h1>
+                <p>By Maarula Classes</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="phoneStep" class="step active"> 
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h2>Begin Your Prediction</h2>
+                    <p>First, please verify your 10-digit mobile number to proceed.</p>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="phoneNumber" placeholder="Enter mobile number" maxlength="10" autocomplete="off">
+                    </div>
+                    <button id="sendOtpBtn" class="btn btn-primary" disabled>Send OTP</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="otpStep" class="step">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-key"></i>
+                    <h2>Enter OTP</h2>
+                    <p>An OTP has been sent to <strong id="displayPhone"></strong></p>
+                </div>
+                <div class="card-body">
+                    <div class="otp-debug" id="otpDebug"></div>
+                    <div id="nameInputContainer" class="input-group" style="display: none;">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="fullName" placeholder="Enter your full name">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="text" id="otpInput" placeholder="Enter 6-digit OTP" maxlength="6" autocomplete="off">
+                    </div>
+                    <button id="verifyOtpBtn" class="btn btn-primary" disabled>Verify & Proceed</button>
+                    <button id="resendOtpBtn" class="btn btn-secondary">Resend OTP</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="predictionStep" class="step">
+            <div class="card">
+                <div class="card-header user-info-header" id="userInfo">
+                    <div class="avatar" id="avatar">U</div>
+                    <div class="user-details">
+                        <strong id="userFullName">User Name</strong>
+                        <small id="verifiedPhone">Phone Number</small>
+                    </div>
+                    <button id="logoutBtn" class="logout-button" title="Logout & Start Over"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <div class="card-body">
+                    <div id="predictionLimitDisplay"></div>
+                    <div class="input-group">
+                        <i class="fas fa-marker"></i>
+                        <input type="number" id="marksInput" placeholder="Enter your NIMCET marks (0-1000)" min="0" max="1000">
+                         <div class="marks-info"><span id="percentageDisplay"></span></div>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-users"></i>
+                        <select id="categorySelect">
+                             <option value="General">General</option>
+                             <option value="EWS">EWS</option>
+                             <option value="OBC">OBC</option>
+                             <option value="SC">SC</option>
+                             <option value="ST">ST</option>
+                             <option value="PWD">PWD</option>
+                        </select>
+                    </div>
+                    <button id="predictBtn" class="btn btn-primary" disabled>Predict My Rank & Colleges</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="resultsContainer" class="results-container"></div>
+        
+    </main>
+    
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+    </div>
+    <div id="toast" class="toast"></div>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 Maarula Classes. All Rights Reserved.</p>
+        <div class="footer-links">
+            <a href="tel:+919935985550"><i class="fas fa-phone"></i> +91 99359 85550</a>
+            <a href="https://maarula.in" target="_blank"><i class="fas fa-globe"></i> maarula.in</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> -->
