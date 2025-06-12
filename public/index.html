@@ -9,6 +9,113 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <link rel="icon" href="maarulalogo.png" type="image/png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-content">
+            <a href="https://maarula.in" target="_blank" title="Visit Maarula Classes">
+                <img src="https://maarula.in/wp-content/uploads/2024/05/80x80.png" alt="Maarula Classes Logo" class="header-logo">
+            </a>
+            <div class="header-title">
+                <h1>NIMCET 2025 Rank Predictor</h1>
+                <p>By Maarula Classes</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="phoneStep" class="step active">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-user-edit"></i>
+                    <h2>Begin Your Prediction</h2>
+                    <p>Enter your details to get started.</p>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="fullName" placeholder="Enter your full name">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="phoneNumber" placeholder="Enter 10-digit mobile number" maxlength="10">
+                    </div>
+                    <button id="startPredictionBtn" class="btn btn-primary">Start Prediction</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="predictionStep" class="step">
+            <div class="card">
+                <div class="card-header user-info-header" id="userInfo">
+                    <div class="avatar" id="avatar">U</div>
+                    <div class="user-details">
+                        <strong id="userFullName">User Name</strong>
+                        <small id="verifiedPhone">Phone Number</small>
+                    </div>
+                    <button id="logoutBtn" class="logout-button" title="Logout & Start Over"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+                <div class="card-body">
+                    <div id="predictionLimitDisplay"></div>
+                    <div class="input-group">
+                        <i class="fas fa-marker"></i>
+                        <input type="number" id="marksInput" placeholder="Enter your NIMCET marks (0-1000)" min="0" max="1000">
+                         <div class="marks-info"><span id="percentageDisplay"></span></div>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-users"></i>
+                        <select id="categorySelect">
+                             <option value="General">General</option>
+                             <option value="EWS">EWS</option>
+                             <option value="OBC">OBC</option>
+                             <option value="SC">SC</option>
+                             <option value="ST">ST</option>
+                             <option value="PWD">PWD</option>
+                        </select>
+                    </div>
+                    <button id="predictBtn" class="btn btn-primary" disabled>Predict My Rank & Colleges</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="resultsContainer" class="results-container">
+            </div>
+    </main>
+    
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+    </div>
+    <div id="toast" class="toast"></div>
+
+    <!-- <footer class="main-footer">
+        <p>&copy; 2025 Maarula Classes. All Rights Reserved.</p>
+        <div class="footer-links">
+            <a href="tel:+919935985550"><i class="fas fa-phone"></i> +91 99359 85550</a>
+            <a href="https://maarula.in" target="_blank"><i class="fas fa-globe"></i> maarula.in</a>
+        </div>
+    </footer> -->
+
+    <script src="script.js"></script>
+</body>
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maarula Classes NIMCET Rank Predictor</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <link rel="icon" href="favicon.png" type="image/png">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -346,4 +453,4 @@
 
     <script src="script.js"></script>
 </body>
-</html> -->
+</html> --> -->
