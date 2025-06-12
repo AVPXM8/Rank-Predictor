@@ -1028,7 +1028,7 @@ app.post('/api/predict-rank', async (req, res) => {
         console.log(`👤 Full Name: ${user.fullName}`);
         console.log(`🎯 Requested Marks: ${marks}`);
         console.log(`📚 Category: ${category}`);
-        console.log(`🔑 Admin Phone Config: 9354368207`);
+        console.log(`🔑 Admin Phone Config:9354368207`);
         console.log(`🔄 Admin Unlimited Enabled: ${PREDICTION_CONFIG.ADMIN_UNLIMITED}`);
         
         // Check if user has unlimited access
