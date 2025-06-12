@@ -370,6 +370,22 @@ body {
     left: 0;
     font-weight: 600;
 }
+/* --- Styling for Added Images --- */
+.image-section, .promo-banner {
+    margin-top: 40px;
+}
+
+.image-section img, .promo-banner img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.promo-banner a:hover img {
+    transform: scale(1.02);
+}
 
 /* --- Loading & Toast --- */
 .loading-overlay {

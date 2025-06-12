@@ -147,35 +147,73 @@ class NIMCETRankPredictor {
             this.showLoading(false);
         }
     }
-    
-    displayResults(prediction) {
-        // This function dynamically creates and adds the result cards
-        const resultsHTML = `
-            <div class="result-card">
-                <div class="result-header"><i class="fas fa-trophy"></i><h3>Your Predicted Rank</h3></div>
-                <div class="result-body">
-                    <div class="rank-display">
-                        <span class="rank-range">${prediction.rankRange.min.toLocaleString()} - ${prediction.rankRange.max.toLocaleString()}</span>
-                        <p class="rank-message">Your Predicted ${prediction.category} Rank</p>
-                    </div>
+    // updated displayresult for better improvement
+    // REPLACE your old displayResults function with this new one
+
+displayResults(prediction) {
+    // This function dynamically creates and adds the result cards
+    const resultsHTML = `
+        <div class="result-card">
+            <div class="result-header"><i class="fas fa-trophy"></i><h3>Your Predicted Rank</h3></div>
+            <div class="result-body">
+                <div class="rank-display">
+                    <span class="rank-range">${prediction.rankRange.min.toLocaleString()} - ${prediction.rankRange.max.toLocaleString()}</span>
+                    <p class="rank-message">Your Predicted ${prediction.category} Rank</p>
                 </div>
             </div>
-            <div class="colleges-section">
-                <div class="colleges-header"><i class="fas fa-university"></i><h3>Recommended Colleges</h3><span class="colleges-count">${prediction.colleges.length} colleges found</span></div>
-                <div class="colleges-list">
-                     ${prediction.colleges.length > 0 ? prediction.colleges.map(college => `
-                        <div class="college-card">
-                            <h4>${college.name}</h4>
-                            <p class="college-location"><i class="fas fa-map-marker-alt"></i> ${college.location}</p>
-                        </div>
-                    `).join('') : '<div class="no-colleges"><p>No colleges found for this rank range and category.</p></div>'}
-                </div>
-            </div>`;
+        </div>
+        <div class="colleges-section">
+            <div class="colleges-header"><i class="fas fa-university"></i><h3>Recommended Colleges</h3><span class="colleges-count">${prediction.colleges.length} colleges found</span></div>
+            <div class="colleges-list">
+                 ${prediction.colleges.length > 0 ? prediction.colleges.map(college => `
+                    <div class="college-card">
+                        <h4>${college.name}</h4>
+                        <p class="college-location"><i class="fas fa-map-marker-alt"></i> ${college.location}</p>
+                    </div>
+                `).join('') : '<div class="no-colleges"><p>No colleges found for this rank range and category.</p></div>'}
+            </div>
+        </div>
+        
+        <div class="promo-banner">
+            <a href="https://play.google.com/store/apps/details?id=com.maarula.classes&pcampaignid=web_share" target="_blank">
+                <img src="promo-banner.jpg" alt="Maarula Mathem App ">
+            </a>
+        </div>
+    `;
 
-        this.resultsContainer.innerHTML = resultsHTML;
-        this.resultsContainer.style.setProperty('display', 'block', 'important');
-        this.resultsContainer.scrollIntoView({ behavior: 'smooth' });
-    }
+    this.resultsContainer.innerHTML = resultsHTML;
+    this.resultsContainer.style.setProperty('display', 'block', 'important');
+    this.resultsContainer.scrollIntoView({ behavior: 'smooth' });
+}
+    
+    // displayResults(prediction) {
+    //     // This function dynamically creates and adds the result cards
+    //     const resultsHTML = `
+    //         <div class="result-card">
+    //             <div class="result-header"><i class="fas fa-trophy"></i><h3>Your Predicted Rank</h3></div>
+    //             <div class="result-body">
+    //                 <div class="rank-display">
+    //                     <span class="rank-range">${prediction.rankRange.min.toLocaleString()} - ${prediction.rankRange.max.toLocaleString()}</span>
+    //                     <p class="rank-message">Your Predicted ${prediction.category} Rank</p>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //         <div class="colleges-section">
+    //             <div class="colleges-header"><i class="fas fa-university"></i><h3>Recommended Colleges</h3><span class="colleges-count">${prediction.colleges.length} colleges found</span></div>
+    //             <div class="colleges-list">
+    //                  ${prediction.colleges.length > 0 ? prediction.colleges.map(college => `
+    //                     <div class="college-card">
+    //                         <h4>${college.name}</h4>
+    //                         <p class="college-location"><i class="fas fa-map-marker-alt"></i> ${college.location}</p>
+    //                     </div>
+    //                 `).join('') : '<div class="no-colleges"><p>No colleges found for this rank range and category.</p></div>'}
+    //             </div>
+    //         </div>`;
+
+    //     this.resultsContainer.innerHTML = resultsHTML;
+    //     this.resultsContainer.style.setProperty('display', 'block', 'important');
+    //     this.resultsContainer.scrollIntoView({ behavior: 'smooth' });
+    // }
     
     logout() {
         localStorage.clear();
