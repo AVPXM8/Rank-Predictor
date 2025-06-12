@@ -1028,13 +1028,13 @@ app.post('/api/predict-rank', async (req, res) => {
         console.log(`👤 Full Name: ${user.fullName}`);
         console.log(`🎯 Requested Marks: ${marks}`);
         console.log(`📚 Category: ${category}`);
-        console.log(`🔑 Admin Phone Config: 9826577904`);
+        console.log(`🔑 Admin Phone Config: 9354368207`);
         console.log(`🔄 Admin Unlimited Enabled: ${PREDICTION_CONFIG.ADMIN_UNLIMITED}`);
         
         // Check if user has unlimited access
         const hasUnlimited = hasUnlimitedAccess(user.phoneNumber);
         console.log(`✅ Has Unlimited Access: ${hasUnlimited}`);
-        console.log(`🎭 Is Admin Phone Match: ${user.phoneNumber === '9826577904'}`);
+        console.log(`🎭 Is Admin Phone Match: ${user.phoneNumber === '9354368207'}`);
         
         // Get prediction counts
         const PREDICTION_LIMIT = PREDICTION_CONFIG.LIMIT_PER_PHONE;
