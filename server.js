@@ -549,7 +549,7 @@ const nimcetColleges = [
 const nimcetRankData = [
     // General Category
     { minMarks: 600, maxMarks: 1000, minRank: 1, maxRank: 10, category: 'General' },
-    { minMarks: 450, maxMarks: 499, minRank: 11, maxRank: 50, category: 'General' },
+    { minMarks: 450, maxMarks: 599, minRank: 11, maxRank: 50, category: 'General' },
     { minMarks: 350, maxMarks: 449, minRank: 51, maxRank: 150, category: 'General' },
     { minMarks: 300, maxMarks: 349, minRank: 151, maxRank: 300, category: 'General' },
     { minMarks: 270, maxMarks: 299, minRank: 301, maxRank: 500, category: 'General' },
