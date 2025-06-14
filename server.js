@@ -175,7 +175,8 @@ const nimcetColleges = [
 
 const nimcetRankData = [
     // FINAL, ultra-granular data for the most precise prediction curve
-    { minMarks: 600, maxMarks: 1000, minRank: 1, maxRank: 20 },
+    { minMarks: 680, maxMarks: 1000, minRank: 1, maxRank: 10 },
+    { minMarks: 600, maxMarks: 1000, minRank: 11, maxRank: 20 },
     { minMarks: 550, maxMarks: 599, minRank: 21, maxRank: 40 },
     { minMarks: 500, maxMarks: 549, minRank: 41, maxRank: 60 },
     { minMarks: 470, maxMarks: 499, minRank: 61, maxRank: 80 },
