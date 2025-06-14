@@ -126,7 +126,7 @@ const nimcetColleges = [
     {
         name: "IIIT Vadodara (Gandhinagar Campus)",
         location: "Gandhinagar, Gujarat", type: "IIIT", tier: 2,
-        cutoffs: { General: { min: 1, max: 1300 }, EWS: { min: 1, max: 1560 }, OBC: { min: 1, max: 1950 }, SC: { min: 1, max: 2600 }, ST: { min: 1, max: 3250 } },
+        cutoffs: { General: { min: 1, max: 1050 }, EWS: { min: 1, max: 1110 }, OBC: { min: 1, max: 1200 }, SC: { min: 1, max: 1500 }, ST: { min: 1, max: 3250 } },
         seats: 120,
     },
     {
