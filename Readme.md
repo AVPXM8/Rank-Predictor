@@ -58,7 +58,7 @@ Follow these steps to set up the project locally:
 
     ```bash
     git clone https://github.com/AVPXM8/Rank-Predictor.git
-    cd your-rank-predictor-repo
+    cd Rank-Predictor
     ```
 
 2. **Install dependencies**
