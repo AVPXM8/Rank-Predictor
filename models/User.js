@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
-
 const userSchema = new mongoose.Schema({
     fullName: {
         type: String,
@@ -20,18 +18,6 @@ const userSchema = new mongoose.Schema({
             message: 'Please enter a valid mobile number'
         }
     },
-    otp: {
-        type: String,
-        required: false
-    },
-    otpExpiry: {
-        type: Date,
-        required: false
-    },
-    isVerified: {
-        type: Boolean,
-        default: false
-    },
     sessionToken: {
         type: String,
         required: false
@@ -48,8 +34,6 @@ const userSchema = new mongoose.Schema({
     timestamps: true // Adds createdAt and updatedAt automatically
 });
 
-// Index for faster queries
-userSchema.index({ phoneNumber: 1 });
 userSchema.index({ sessionToken: 1 });
 
 module.exports = mongoose.model('User', userSchema);

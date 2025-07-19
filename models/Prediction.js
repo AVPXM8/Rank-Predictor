@@ -33,12 +33,6 @@ const predictionSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    additionalInfo: {
-        percentage: Number,
-        percentile: Number,
-        candidatesAhead: Number,
-        candidatesBehind: Number
-    }
 }, {
     timestamps: true
 });

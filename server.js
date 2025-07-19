@@ -1,15 +1,10 @@
-// =================================================================
-// FINAL, COMPLETE, AND CORRECTED SERVER.JS
-// =================================================================
 
-// Load environment variables FIRST
 require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
-const axios = require('axios'); // For MSG91 or other HTTP requests
 
 // Import Models
 const User = require('./models/User');
@@ -45,12 +40,11 @@ app.use(express.json());
 app.use(express.static('public'));
 
 
-// =================================================================
-// ⭐️ DATA ARRAYS START HERE ⭐️
-// =================================================================
+
+// DATA ARRAYS START HERE 
 
 const nimcetColleges = [
-    // Data updated based on official 2024 Cutoff PDF and your notes
+    // Data updated based on official 2024 Cutoff
     {
         name: "NIT Trichy (Tiruchirappalli)",
         location: "Tiruchirappalli, Tamil Nadu", type: "NIT", tier: 1,
@@ -174,7 +168,7 @@ const nimcetColleges = [
 ];
 
 const nimcetRankData = [
-    // FINAL, ultra-granular data for the most precise prediction curve
+    //data for the most precise prediction 
     { minMarks: 680, maxMarks: 1000, minRank: 1, maxRank: 10 },
     { minMarks: 600, maxMarks: 1000, minRank: 11, maxRank: 20 },
     { minMarks: 550, maxMarks: 599, minRank: 21, maxRank: 40 },
@@ -219,9 +213,8 @@ const getEligibleColleges = (minRank, maxRank, category) => {
     return eligibleColleges.sort((a, b) => a.cutoffs[category].max - b.cutoffs[category].max);
 };
 
-// =================================================================
-// ⭐️ API ROUTES START HERE ⭐️
-// =================================================================
+//  API ROUTES START HERE 
+
 
 // Simplified "No OTP" login route
 app.post('/api/register-guest', async (req, res) => {
@@ -243,9 +236,19 @@ app.post('/api/register-guest', async (req, res) => {
             success: true, message: `Welcome ${user.fullName}!`, token: user.sessionToken,
             user: { fullName: user.fullName, phoneNumber: user.phoneNumber }
         });
-    } catch (error) {
-        res.status(500).json({ success: false, message: 'An error occurred. Please try again.' });
+    } 
+    catch (error) {
+    // Check if the error is a Mongoose validation error
+    if (error.name === 'ValidationError') {
+        // Extract the specific error message from the schema
+        const validationMessage = Object.values(error.errors)[0].message;
+        return res.status(400).json({ success: false, message: validationMessage });
     }
+
+    // For any other unexpected errors, log it and send a generic 500 error
+    console.error("Registration Error:", error);
+    res.status(500).json({ success: false, message: 'An internal server error occurred.' });
+}
 });
 
 // The main prediction route
