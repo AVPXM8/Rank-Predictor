@@ -8,8 +8,7 @@
     "dev": "nodemon server.js",
     "build": "npm install",
     "test": "echo 'No tests specified'",
-    "lint": "echo 'No linting configured'",
-    "clean": "rm -rf data/*.json && echo '[]' > data/users.json && echo '[]' > data/predictions.json"
+    "lint": "echo 'No linting configured'"
   },
   "engines": {
     "node": ">=14.0.0",
@@ -27,27 +26,22 @@
     "1000-marks",
     "nit-mca"
   ],
-  "author": "Your Name",
-  "license": "MIT",
+  "author": "Vivek Kumar",
   "dependencies": {
-    "axios": "^1.9.0",
-    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^4.21.2",
-    "mongoose": "^8.15.1",
-    "twilio": "^5.7.0",
-    "validator": "^13.15.15"
+    "mongoose": "^8.15.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/username/repository-name"
+    "url": "https://github.com/avpxm8/Rank-Predictor"
   },
   "bugs": {
-    "url": "https://github.com/username/repository-name/issues"
+    "url": "https://github.com/avpxm8/Rank-Predictor/issues"
   },
-  "homepage": "your-app-url"
+  "homepage": "https://maarularankpredictor.onrender.com/"
 }
